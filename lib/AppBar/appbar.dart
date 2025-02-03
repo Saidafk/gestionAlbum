@@ -5,7 +5,7 @@ class appBar_Principal extends StatefulWidget implements PreferredSizeWidget{
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
   appBar_Principal({super.key, required this.actions});
-  String title = 'App bar';
+  String title = 'Gestion des albums';
   List<Widget> actions = [];
 
   @override

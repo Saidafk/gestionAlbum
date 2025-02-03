@@ -2,18 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:json_theme/json_theme.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
-
 import 'package:tp6/AppBar/appbar.dart';
 import 'package:tp6/album.dart';
+import 'Theme/ThemeController.dart';
 import 'iconenavbar_icons.dart';
-
-class ThemeController extends ValueNotifier<ThemeMode> {
-  ThemeController() : super(ThemeMode.light);
-
-  void toggleTheme() {
-    value = value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-  }
-}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,26 +74,72 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: IndexedStack(
         index: currentPageIndex,
-        children: <Widget>[
+        children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                "Page album",
+              Card(
+                color: Colors.green,
+                child: Row(
+                  children: [
+                    Image.asset('images/imgAccueil/vinyltransp.webp'),
+                    Expanded(
+                      child: Text(
+                        "Bienvenue sur l'application de gestion d'album",
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+
+                  children: <Widget>[
+                    ListTile(
+                      title: Text("News"),
+                      subtitle: Text("Dernières actualités"),
+                    )
+                  ],
+                ),
+              ),
+              Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      title: Text("Version 1 en cours de développement"),
+                      subtitle: Text("Wait and see"),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
           Column(
-            children: <Widget>[
-              Album(),
+            children: const <Widget>[
+              Text('Musique'),
             ],
           ),
           Column(
-          children: const <Widget>[
-            Text('Settings'),
-            ]
+            children: const <Widget>[
+              Text('Settings'),
+            ],
           ),
         ],
       ),
+
+      floatingActionButton: currentPageIndex == 0
+          ? FloatingActionButton(
+        onPressed: () {
+        },
+        backgroundColor: Colors.green,
+        child: Icon(Icons.add),
+
+      ): null,
+
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {
@@ -125,6 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+
     );
   }
 }
